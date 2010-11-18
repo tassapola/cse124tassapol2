@@ -18,6 +18,12 @@ public class ByteArrayWrapper {
 		data[size++] = b;
 	}
 
+	void addString(String s) {
+		for (int i=0; i < s.length(); i++) {
+			addByte((byte) s.charAt(i));
+		}
+	}
+	
 	public byte[] getData() {
 		return data;
 	}
