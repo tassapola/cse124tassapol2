@@ -9,6 +9,7 @@ public class FrontEnd {
 
 	public void process() {
 		DownloadResult dlResult = Downloader.download(url);
-		MyUtil.print(dlResult.getData());
+		
+		///MyUtil.print(dlResult.getData());
 	}
 }
