@@ -7,4 +7,10 @@ public class MyUtil {
 		}
 		System.out.println();
 	}
+	
+	public static String rewriteURL(String url) {
+		String result = null;
+		
+		return result;
+	}
 }
