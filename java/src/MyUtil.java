@@ -10,6 +10,10 @@ public class MyUtil {
 	
 	public final static String defaultRewriteUrlHost = "http://localhost/check_cache.jsp?url=";
 	
+	public static String rewriteUrl(String url, String sourceUrl) {
+		return rewriteUrl(url, defaultRewriteUrlHost, sourceUrl);	
+	}
+	
 	/**
 	 * Given a string of URL, return a string of rewritten URL
 	 * @param url
@@ -45,6 +49,10 @@ public class MyUtil {
 			result += url;
 		}
 		return result;
+	}
+	
+	public static byte[] getDataAfterModifyUrl(byte[] data, String sourceURL) {
+		return getDataAfterModifyUrl(data, defaultRewriteUrlHost, sourceURL);
 	}
 	
 	public static byte[] getDataAfterModifyUrl(byte[] data, String rewriteUrlHost, String sourceURL) {
@@ -96,6 +104,6 @@ public class MyUtil {
 	
 	private static String convertAHrefString(String org, String sourceURL) {
 		String[] tokens = org.split("\"");
-		return tokens[0] + "\"" + rewriteUrl(tokens[1], defaultRewriteUrlHost, sourceURL) + "\"" + tokens[2];
+		return tokens[0] + "\"" + rewriteUrl(tokens[1], sourceURL) + "\"" + tokens[2];
 	}
 }
