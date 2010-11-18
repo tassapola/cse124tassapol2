@@ -1,5 +1,7 @@
 package util;
 
+import java.io.PrintStream;
+
 public class MyUtil {
 
 	public static void print(byte[] data) {
@@ -7,6 +9,13 @@ public class MyUtil {
 			System.out.print((char) data[i]);
 		}
 		System.out.println();
+	}
+	
+	public static void print(PrintStream ps, byte[] data) {
+		for (int i=0; i < data.length; i++) {
+			ps.print((char) data[i]);
+		}
+		ps.println();
 	}
 	
 	public final static String defaultRewriteUrlHost = "http://localhost/check_cache.jsp?url=";
