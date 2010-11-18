@@ -1,3 +1,4 @@
+package util;
 import java.util.Arrays;
 
 
@@ -10,7 +11,7 @@ public class ByteArrayWrapper {
 		data = new byte[1000000];
 	}
 	
-	void addByte(byte b) {
+	public void addByte(byte b) {
 		if (size == data.length) {
 			//byte[] newData = new byte[size*2];
 			data = Arrays.copyOf(data, size*2);
