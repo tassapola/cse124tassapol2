@@ -1,3 +1,6 @@
+package etc;
+import proxy.FrontEnd;
+
 
 public class Test1 {
 
