@@ -9,7 +9,7 @@ public class FrontEnd {
 
 	public void process() {
 		DownloadResult dlResult = Downloader.download(url);
-		
+		MyUtil.print(MyUtil.getDataAfterModifyUrl(dlResult.getData(), MyUtil.defaultRewriteUrlHost, url));
 		///MyUtil.print(dlResult.getData());
 	}
 }
