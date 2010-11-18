@@ -8,27 +8,46 @@ public class MyUtil {
 		System.out.println();
 	}
 	
-	public final static String defaultRewriteUrlHost = "localhost/check_cache.jsp?url=";
+	public final static String defaultRewriteUrlHost = "http://localhost/check_cache.jsp?url=";
 	
-	public static String rewriteUrl(String url, String rewriteUrlHost) {
+	/**
+	 * Given a string of URL, return a string of rewritten URL
+	 * @param url
+	 * @param rewriteUrlHost
+	 * @param sourceUrl
+	 * @return
+	 */
+	public static String rewriteUrl(String url, String rewriteUrlHost, String sourceUrl) {
 		String result = null;
-		String[] tokens = url.split("/");
-		//for (int i=0; i < tokens.length; i++) {
-		//	System.out.println(tokens[i]);
-		//}
-		result = tokens[0] + "//" + rewriteUrlHost;
-		for (int i=2; i < tokens.length; i++) {
-			//System.out.println(tokens[i] + " " + result);
-			if (i != 2) {
-				result += "/" + tokens[i];
-			} else {
-				result += tokens[i];
+		
+		if (url.startsWith("http")) {
+			String[] tokens = url.split("/");
+			result = rewriteUrlHost;
+			for (int i=0; i < tokens.length; i++) {
+				if (i != 0) {
+					result += "/" + tokens[i];
+				} else {
+					result += tokens[i];
+				}
 			}
+		} else {
+			String[] sourceUrlTokens = sourceUrl.split("/");
+			result = "";
+			
+			result = rewriteUrlHost;
+			for (int i=0; i < sourceUrlTokens.length-1; i++) {
+				result += sourceUrlTokens[i] + "/";
+			}
+			//System.out.println(sourceUrlTokens[sourceUrlTokens.length-1]);
+			if (sourceUrl.charAt(sourceUrl.length()-1) == '/') {
+				result += sourceUrlTokens[sourceUrlTokens.length-1] + "/";
+			}
+			result += url;
 		}
 		return result;
 	}
 	
-	public static byte[] getDataAfterModifyUrl(byte[] data, String rewriteUrlHost) {
+	public static byte[] getDataAfterModifyUrl(byte[] data, String rewriteUrlHost, String sourceURL) {
 		ByteArrayWrapper bAW = new ByteArrayWrapper();
 		boolean inAHref = false;
 		StringBuilder aHref = null;
@@ -46,7 +65,7 @@ public class MyUtil {
 					//System.out.println(w);
 					inAHref = false;
 					//System.out.println(aHref);
-					String newAHrefString = convertAHrefString(aHref.toString());
+					String newAHrefString = convertAHrefString(aHref.toString(), sourceURL);
 					//System.out.println(newAHrefString);
 					bAW.addString(newAHrefString);
 				}
@@ -75,8 +94,8 @@ public class MyUtil {
 		else return (char) data[index];
 	}
 	
-	private static String convertAHrefString(String org) {
+	private static String convertAHrefString(String org, String sourceURL) {
 		String[] tokens = org.split("\"");
-		return tokens[0] + "\"" + rewriteUrl(tokens[1], defaultRewriteUrlHost) + "\"" + tokens[2];
+		return tokens[0] + "\"" + rewriteUrl(tokens[1], defaultRewriteUrlHost, sourceURL) + "\"" + tokens[2];
 	}
 }
