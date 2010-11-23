@@ -67,13 +67,13 @@ public class MyUtil {
 	
 	public static byte[] getDataAfterModifyUrl(byte[] data, String rewriteUrlHost, String sourceURL) {
 		ByteArrayWrapper bAW = new ByteArrayWrapper();
-		boolean inAHref = false;
-		StringBuilder aHref = null;
+		boolean inAHrefImg = false;
+		StringBuilder aHrefImg = null;
 		
 		for (int i=0; i < data.length; i++) {
 			char c = (char) data[i];
-			if (inAHref) {
-				aHref.append((char) data[i]);
+			if (inAHrefImg) {
+				aHrefImg.append((char) data[i]);
 				StringBuilder w = new StringBuilder();
 				//w.append(get(data, i-3));
 				//w.append(get(data, i-2));
@@ -81,22 +81,24 @@ public class MyUtil {
 				w.append(get(data, i));
 				if (w.toString().compareTo("\">") == 0) {
 					//System.out.println(w);
-					inAHref = false;
+					inAHrefImg = false;
 					//System.out.println(aHref);
-					String newAHrefString = convertAHrefString(aHref.toString(), sourceURL);
+					String newAHrefString = convertAHrefString(aHrefImg.toString(), sourceURL);
 					//System.out.println(newAHrefString);
 					bAW.addString(newAHrefString);
 				}
 			} else {
 				StringBuilder w = new StringBuilder();
-				for (int j=0; j < 9; j++) {
+				for (int j=0; j < 50; j++) {
 					w.append(get(data, i+j));
 				} 
-				if (w.toString().compareTo("<a href=\"") == 0) {
+				if ((w.toString().substring(0, 9).compareTo("<a href=\"") == 0)
+					|| (w.toString().substring(0, 5).compareTo("<img ") == 0)
+				    ) {
 					//System.out.println(w);
-					inAHref = true;
-					aHref = new StringBuilder();
-					aHref.append((char) data[i]);
+					inAHrefImg = true;
+					aHrefImg = new StringBuilder();
+					aHrefImg.append((char) data[i]);
 				} else {
 					bAW.addByte(data[i]);	
 				}
@@ -113,7 +115,57 @@ public class MyUtil {
 	}
 	
 	private static String convertAHrefString(String org, String sourceURL) {
+		String result = "";
+		//System.out.println(org);
+		int index1;
+		String sToFind = null;
+		sToFind = "src=\"";
+		index1 = org.indexOf(sToFind);
+		if (index1 != -1) {
+			StringBuilder s = new StringBuilder();
+			int index2 = 0;
+			for (int i=index1+sToFind.length(); i < org.length(); i++) {
+				if (org.charAt(i) != '"') {
+				  s.append(org.charAt(i));
+				} else {
+				  index2 = i;
+			      break;
+				}
+			}
+			//System.out.println("s = " + s);
+			result = org.substring(0, index1+sToFind.length()) + rewriteUrl(s.toString(), sourceURL) + org.substring(index2, org.length());
+			//System.out.println(result);
+			return result;
+		} 
+		sToFind = "href=\"";
+		index1 = org.indexOf(sToFind);
+		if (index1 != -1) {
+			StringBuilder s = new StringBuilder();
+			int index2 = 0;
+			for (int i=index1+sToFind.length(); i < org.length(); i++) {
+				if (org.charAt(i) != '"') {
+				  s.append(org.charAt(i));
+				} else {
+				  index2 = i;
+			      break;
+				}
+			}
+			result = org.substring(0, index1+sToFind.length()) + rewriteUrl(s.toString(), sourceURL) + org.substring(index2, org.length());
+			//System.out.println(result);
+			return result;
+		} 
+		
+		/*
 		String[] tokens = org.split("\"");
-		return tokens[0] + "\"" + rewriteUrl(tokens[1], sourceURL) + "\"" + tokens[2];
+		int size = tokens.length;
+		System.out.println(tokens);
+		
+		for (int i=0; i < size-1; i++) {
+			result += tokens[i] + "\"";
+		}
+			
+		result += rewriteUrl(tokens[size-2], sourceURL) + "\"" + tokens[size-1];
+		*/ 
+		return result;
 	}
 }
