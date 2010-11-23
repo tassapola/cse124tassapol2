@@ -25,7 +25,15 @@ public class CacheManager {
 			return dr.getData();
 		} else {
 			//check if-modified since
+			if (Downloader.isModifiedSince(url, o.getDate())) {
+				//need to refresh cache
+				DownloadResult dr = downloader.download(url);
+				CacheData c = new CacheData(dr.getDate(), dr.getData());
+				cache.put(url, c);
+				return dr.getData();
+			} else {
+				return o.getData();
+			}
 		}
-		return o.getData();
 	}
 }
