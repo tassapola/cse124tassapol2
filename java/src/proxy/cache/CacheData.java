@@ -8,11 +8,11 @@ public class CacheData {
 	 * GMT time of target server
 	 */
 	private Date date;
-	private byte[] data;
+	private String filename;
 	
-	public CacheData(Date date, byte[] data) {
+	public CacheData(Date date, String filename) {
 		this.date = date;
-		this.data = data;
+		this.filename = filename;
 	}
 	
 	public Date getDate() {
@@ -21,13 +21,15 @@ public class CacheData {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public byte[] getData() {
-		return data;
-	}
-	public void setData(byte[] data) {
-		this.data = data;
-	}
 	
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
 	public boolean isNewerThanCache(Date d) {
 		return d.after(date);
 	}
