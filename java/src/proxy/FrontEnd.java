@@ -15,8 +15,7 @@ public class FrontEnd {
 		dlResult = Downloader.download(url);
 		byte[] newData = MyUtil.getDataAfterModifyUrl(dlResult.getData(), url);
 		dlResult.setData(newData);
-		//MyUtil.print(MyUtil.getDataAfterModifyUrl(dlResult.getData(), MyUtil.defaultRewriteUrlHost, url));
-		///MyUtil.print(dlResult.getData());
+		MyUtil.print(dlResult.getData());
 	}
 	
 	public void writeFile(String location) {
