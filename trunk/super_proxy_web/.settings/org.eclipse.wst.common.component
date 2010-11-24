@@ -3,6 +3,7 @@
     <wb-module deploy-name="super_proxy_web">
         <wb-resource deploy-path="/" source-path="/WebContent"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
         <property name="context-root" value="cse124demo"/>
         <property name="java-output-path" value="/super_proxy_web/build/classes"/>
     </wb-module>

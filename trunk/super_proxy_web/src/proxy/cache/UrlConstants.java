@@ -8,4 +8,6 @@ public class UrlConstants {
 	public static final int STARTING_CONTENT_SIZE = 1000000;
 	
 	public static final String HADOOP_PATH = "hdfs://cse124demo:9000";
+	
+	public static final int NUM_THREADS_MULTI_DOWNLOAD = 4;
 }
