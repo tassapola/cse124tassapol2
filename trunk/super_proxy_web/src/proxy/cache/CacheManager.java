@@ -34,7 +34,9 @@ public class CacheManager {
 				return null;
 			}
 			//rewrite url
-			dr.setData(MyUtil.getDataAfterModifyUrl(dr.getData(), url));
+			byte[] newData = MyUtil.getDataAfterModifyUrl(dr.getData(), url);
+			dr.setContentLength(newData.length);
+			dr.setData(newData);
 			String newFileName = CacheUtil.getRelativeHadoopPath(url);
 			CacheData c = new CacheData(dr, newFileName);
 			cache.put(url, c);
@@ -42,8 +44,6 @@ public class CacheManager {
 			//writer.start();
 			//this version will block until write finishes
 			writer.write();
-			System.out.println("===");
-			MyUtil.print(dr.getData());
 			return new FrontEndResult(c, dr.getData());
 		} else {
 			//check if-modified since
@@ -54,11 +54,16 @@ public class CacheManager {
 				if (dr == null) {
 					return null;
 				}
+				byte[] newData = MyUtil.getDataAfterModifyUrl(dr.getData(), url);
+				dr.setContentLength(newData.length);
+				dr.setData(newData);
 				String filepath = o.getFilepath();
 				CacheData c = new CacheData(dr, filepath);
 				cache.put(url, c);
 				HdfsWriter writer = new HdfsWriter(dr.getData(), filepath);
-				writer.start();
+				//writer.start();
+				//this version will block until write finishes
+				writer.write();
 				return new FrontEndResult(c, dr.getData());
 			} else {
 				System.out.println("case 3: read data from hadoop fs");
