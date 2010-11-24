@@ -20,11 +20,19 @@ public class CacheManager {
 		cache = new HashMap<String, CacheData>();
 	}
 		
+	/**
+	 * return null if error
+	 * @param url
+	 * @return
+	 */
 	public synchronized FrontEndResult getFrontEndResult(String url) {
 		CacheData o = cache.get(url);
 		if (o == null) {
 			System.out.println("case 1: new url");
 			DownloadResult dr = Downloader.download(url);
+			if (dr == null) {
+				return null;
+			}
 			//rewrite url
 			dr.setData(MyUtil.getDataAfterModifyUrl(dr.getData(), url));
 			String newFileName = CacheUtil.getRelativeHadoopPath(url);
@@ -41,6 +49,9 @@ public class CacheManager {
 				System.out.println("case 2: refresh cache");
 				//need to refresh cache
 				DownloadResult dr = Downloader.download(url);
+				if (dr == null) {
+					return null;
+				}
 				String filepath = o.getFilepath();
 				CacheData c = new CacheData(dr, filepath);
 				cache.put(url, c);

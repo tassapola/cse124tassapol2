@@ -106,6 +106,7 @@ public class MyUtil {
 			
 			
 		}
+		MyUtil.print(bAW.getFinalByteArray());
 		return bAW.getFinalByteArray();
 	}
 	
