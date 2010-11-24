@@ -1,6 +1,8 @@
 package util;
 import java.util.Arrays;
 
+import proxy.cache.UrlConstants;
+
 
 public class ByteArrayWrapper {
 	private byte[] data; //0..size-1
@@ -8,7 +10,7 @@ public class ByteArrayWrapper {
 	
 	public ByteArrayWrapper() {
 		size = 0;
-		data = new byte[1000000];
+		data = new byte[UrlConstants.STARTING_CONTENT_SIZE];
 	}
 	
 	public void addByte(byte b) {

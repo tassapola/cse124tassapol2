@@ -7,11 +7,12 @@ import java.net.URI;
 import org.apache.hadoop.conf.*;
 import org.apache.hadoop.fs.*;
 
+import proxy.cache.UrlConstants;
+
 public class HdfsWriter extends Thread{
 
 	private byte[] data;
 	private String path;
-	private static final String HADOOP_PATH = "hdfs://cse124demo:9000"; 
 	
 	/**
 	 * accepts relativePath
@@ -21,7 +22,7 @@ public class HdfsWriter extends Thread{
 	 */
 	public HdfsWriter(byte[] data, String relativePath) {
 		this.data = data;
-		this.path = HADOOP_PATH + relativePath;
+		this.path = UrlConstants.HADOOP_PATH + relativePath;
 	}
 	
 	public void run() {
