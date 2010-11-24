@@ -18,6 +18,10 @@ public class Test1 {
 		System.out.println(fer1);
 		FrontEndResult fer2 = f.updateCacheReturn(url);
 		System.out.println(fer2);
+		
+		
+		//http://www.thai-real.com/imgs_hotel/lawana_resort.jpg
+		//http://www.thailandgolftravel.com/leefiles/image/beach/Samui.jpg
 	}
 
 }
