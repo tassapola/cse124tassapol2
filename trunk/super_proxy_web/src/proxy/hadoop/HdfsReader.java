@@ -13,15 +13,16 @@ import org.apache.hadoop.conf.*;
 import org.apache.hadoop.fs.*;
 import org.apache.hadoop.io.IOUtils;
 
+import proxy.cache.UrlConstants;
+
 import util.ByteArrayWrapper;
 
 public class HdfsReader{
 
-	private String path;
-	private static final String HADOOP_PATH = "hdfs://cse124demo:9000"; 
+	private String path; 
 	
 	public HdfsReader(String relativePath) {
-		this.path = HADOOP_PATH + relativePath;
+		this.path = UrlConstants.HADOOP_PATH + relativePath;
 	}
 	
 	/**
