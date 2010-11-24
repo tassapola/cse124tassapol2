@@ -42,6 +42,8 @@ public class CacheManager {
 			//writer.start();
 			//this version will block until write finishes
 			writer.write();
+			System.out.println("===");
+			MyUtil.print(dr.getData());
 			return new FrontEndResult(c, dr.getData());
 		} else {
 			//check if-modified since
