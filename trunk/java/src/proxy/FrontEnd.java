@@ -12,9 +12,9 @@ public class FrontEnd {
 		cacheMgr = new CacheManager();
 	}
 
-	public byte[] updateCacheReturn(String url) {
-		byte[] data = cacheMgr.getData(url);
-		return data;
+	public FrontEndResult updateCacheReturn(String url) {
+		FrontEndResult result = cacheMgr.getFrontEndResult(url);
+		return result;
 	}
 	
 	/*

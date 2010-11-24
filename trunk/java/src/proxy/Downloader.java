@@ -59,8 +59,11 @@ public class Downloader {
 			e.printStackTrace();
 		}
 		InputStream in = null;
+		URLConnection urlConn = null;
+		
 		try {
-			in = netUrl.openStream();
+			urlConn = netUrl.openConnection();
+			in = urlConn.getInputStream();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -84,6 +87,9 @@ public class Downloader {
 		}
 		result.setData(byteAW.getFinalByteArray());
 		result.setDate(new Date());
+		result.setContentEncoding(urlConn.getContentEncoding());
+		result.setContentLength(urlConn.getContentLength());
+		result.setContentType(urlConn.getContentType());
 		return result;
 	}
 }

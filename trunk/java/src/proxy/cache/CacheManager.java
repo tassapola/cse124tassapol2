@@ -18,7 +18,7 @@ public class CacheManager {
 		cache = new HashMap<String, CacheData>();
 	}
 		
-	public synchronized byte[] getData(String url) {
+	public synchronized FrontEndResult getFrontEndResult(String url) {
 		CacheData o = cache.get(url);
 		if (o == null) {
 			System.out.println("case 1: new url");
@@ -26,13 +26,13 @@ public class CacheManager {
 			//rewrite url
 			dr.setData(MyUtil.getDataAfterModifyUrl(dr.getData(), url));
 			String newFileName = CacheUtil.getRelativeHadoopPath(url);
-			CacheData c = new CacheData(dr.getDate(), newFileName);
+			CacheData c = new CacheData(dr, newFileName);
 			cache.put(url, c);
 			HdfsWriter writer = new HdfsWriter(dr.getData(), newFileName);
 			//writer.start();
 			//this version will block until write finishes
 			writer.write();
-			return dr.getData();
+			return new FrontEndResult(c, dr.getData());
 		} else {
 			//check if-modified since
 			if (Downloader.isModifiedSince(url, o.getDate())) {
@@ -40,16 +40,16 @@ public class CacheManager {
 				//need to refresh cache
 				DownloadResult dr = Downloader.download(url);
 				String filepath = o.getFilepath();
-				CacheData c = new CacheData(dr.getDate(), filepath);
+				CacheData c = new CacheData(dr, filepath);
 				cache.put(url, c);
 				HdfsWriter writer = new HdfsWriter(dr.getData(), filepath);
 				writer.start();
-				return dr.getData();
+				return new FrontEndResult(c, dr.getData());
 			} else {
 				System.out.println("case 3: read data from hadoop fs");
 				//read data from hadoop fs
 				HdfsReader reader = new HdfsReader(o.getFilepath());
-				return reader.read();
+				return new FrontEndResult(o, reader.read());
 			}
 		}
 	}
