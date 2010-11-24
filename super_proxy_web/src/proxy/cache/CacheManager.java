@@ -75,4 +75,13 @@ public class CacheManager {
 			}
 		}
 	}
+
+	public HashMap<String, CacheData> getCache() {
+		return cache;
+	}
+
+	public void setCache(HashMap<String, CacheData> cache) {
+		this.cache = cache;
+	}
+	
 }
