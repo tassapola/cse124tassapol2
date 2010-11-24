@@ -154,18 +154,7 @@ public class MyUtil {
 			//System.out.println(result);
 			return result;
 		} 
-		
-		/*
-		String[] tokens = org.split("\"");
-		int size = tokens.length;
-		System.out.println(tokens);
-		
-		for (int i=0; i < size-1; i++) {
-			result += tokens[i] + "\"";
-		}
-			
-		result += rewriteUrl(tokens[size-2], sourceURL) + "\"" + tokens[size-1];
-		*/ 
 		return result;
 	}
+	
 }
