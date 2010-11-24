@@ -34,6 +34,7 @@ public class MyUtil {
 	public static String rewriteUrl(String url, String rewriteUrlHost, String sourceUrl) {
 		String result = null;
 		
+		
 		if (url.startsWith("http")) {
 			//absolute link
 			String[] tokens = url.split("/");
@@ -60,6 +61,9 @@ public class MyUtil {
 			}
 			result += url;
 		}
+		System.out.println("url rewriting");
+		System.out.println(url);
+		System.out.println(result);
 		return result;
 	}
 	
@@ -96,6 +100,7 @@ public class MyUtil {
 				} 
 				if ((w.toString().substring(0, 9).compareTo("<a href=\"") == 0)
 					|| (w.toString().substring(0, 5).compareTo("<img ") == 0)
+					|| (w.toString().substring(0, 7).compareTo("<frame ") == 0)
 				    ) {
 					//System.out.println(w);
 					inAHrefImg = true;
@@ -108,7 +113,7 @@ public class MyUtil {
 			
 			
 		}
-		MyUtil.print(bAW.getFinalByteArray());
+		//MyUtil.print(bAW.getFinalByteArray());
 		return bAW.getFinalByteArray();
 	}
 	
@@ -119,7 +124,7 @@ public class MyUtil {
 	
 	private static String convertAHrefString(String org, String sourceURL) {
 		String result = "";
-		//System.out.println(org);
+		System.out.println("convert ahref string " + org);
 		int index1;
 		String sToFind = null;
 		sToFind = "src=\"";
