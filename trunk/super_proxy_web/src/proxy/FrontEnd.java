@@ -20,6 +20,11 @@ public class FrontEnd {
 		System.out.println("requesting, url = " + url + " - " + result);
 		return result;
 	}
+
+	public CacheManager getCacheMgr() {
+		return cacheMgr;
+	}
+	
 	
 	/*
 	public void writeFile(String location) {

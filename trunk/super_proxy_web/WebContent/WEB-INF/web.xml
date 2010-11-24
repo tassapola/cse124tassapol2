@@ -9,19 +9,21 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <servlet-name>CheckCache</servlet-name>
+    <servlet-class>servlet.CheckCache</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckCache</servlet-name>
+    <url-pattern>/CheckCache</url-pattern>
+  </servlet-mapping>
   
-   <servlet>
-      <servlet-name>CheckCache</servlet-name>
-      <servlet-class>servlet.CheckCache</servlet-class>
-      <init-param>
-        <param-name></param-name>
-        <param-value></param-value>
-      </init-param>
-    </servlet>
-
-    <servlet-mapping>
-      <servlet-name>CheckCache</servlet-name>
-      <url-pattern>/CheckCache</url-pattern>
-    </servlet-mapping>
-    
+  <servlet>
+    <servlet-name>CacheStatus</servlet-name>
+    <servlet-class>servlet.CacheStatus</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CacheStatus</servlet-name>
+    <url-pattern>/CacheStatus</url-pattern>
+  </servlet-mapping>
 </web-app>
