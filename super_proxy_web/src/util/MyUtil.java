@@ -61,9 +61,9 @@ public class MyUtil {
 			}
 			result += url;
 		}
-		System.out.println("url rewriting");
-		System.out.println(url);
-		System.out.println(result);
+		//System.out.println("url rewriting");
+		//System.out.println(url);
+		//System.out.println(result);
 		return result;
 	}
 	
@@ -86,11 +86,8 @@ public class MyUtil {
 				w.append(get(data, i-1));
 				w.append(get(data, i));
 				if (w.toString().compareTo("\">") == 0) {
-					//System.out.println(w);
 					inAHrefImg = false;
-					//System.out.println(aHref);
 					String newAHrefString = convertAHrefString(aHrefImg.toString(), sourceURL);
-					//System.out.println(newAHrefString);
 					bAW.addString(newAHrefString);
 				}
 			} else {
@@ -102,7 +99,6 @@ public class MyUtil {
 					|| (w.toString().substring(0, 5).compareTo("<img ") == 0)
 					|| (w.toString().substring(0, 7).compareTo("<frame ") == 0)
 				    ) {
-					//System.out.println(w);
 					inAHrefImg = true;
 					aHrefImg = new StringBuilder();
 					aHrefImg.append((char) data[i]);
@@ -124,7 +120,7 @@ public class MyUtil {
 	
 	private static String convertAHrefString(String org, String sourceURL) {
 		String result = "";
-		System.out.println("convert ahref string " + org);
+		//System.out.println("convert ahref string " + org);
 		int index1;
 		String sToFind = null;
 		sToFind = "src=\"";

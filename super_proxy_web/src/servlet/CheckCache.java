@@ -42,16 +42,11 @@ public class CheckCache extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//System.out.println("starting doGet");
 		ServletContext sContext = getServletContext();
-		//System.out.println("sContext = " + sContext);
 		FrontEnd f = (FrontEnd) sContext.getAttribute("front_end");
-		//System.out.println("f = " + f);
 		String url = (String) request.getParameter("url");
-		//System.out.println("url = " + url);
 		FrontEndResult fer = null;
 		if (url != null) {
-			System.out.println("before call updatecachereturn");
 			fer = f.updateCacheReturn(url);
 		}
 		if (fer == null) {
@@ -62,39 +57,11 @@ public class CheckCache extends HttpServlet {
 			response.setContentLength(fer.getContentLength());
 			response.setCharacterEncoding(fer.getContentEncoding());
 			response.setContentType(fer.getContentType());
-			
-			System.out.println("content type = " + fer.getContentType());
-			byte[] data = fer.getData();
-			if (fer.getContentType().equals("text/html; charset=UTF-8")) {
-				System.out.println("text/html");
-				PrintWriter p = response.getWriter();
-				for (int i=0; i < data.length; i++) {
-					p.print((char) fer.getData()[i]);
-					System.out.print((char) fer.getData()[i]);
-				}
-				System.out.println("end of printing out");
-				//o.write(fer.getData());
-				//System.out.println("=servlet=");
-				//MyUtil.print(fer.getData());
-				p.flush();
-				p.close();
-			} else {
-				
-				ServletOutputStream o = response.getOutputStream();
-				
-				
-				System.out.println("start writing out");
-				for (int i=0; i < data.length; i++) {
-					o.write(fer.getData()[i]);
-					System.out.print((char) fer.getData()[i]);
-				}
-				//o.write(fer.getData());
-				//System.out.println("=servlet=");
-				//MyUtil.print(fer.getData());
-				o.flush();
-				o.close();
-				}
+			ServletOutputStream o = response.getOutputStream();
+			o.write(fer.getData());
+			o.close();
 		}
+		
 	}
 
 }

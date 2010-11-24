@@ -15,9 +15,9 @@ public class FrontEnd {
 	}
 
 	public FrontEndResult updateCacheReturn(String url) {
-		System.out.println("starting update cache return");
+		//System.out.println("starting update cache return");
 		FrontEndResult result = cacheMgr.getFrontEndResult(url);
-		System.out.println(result);
+		System.out.println("requesting, url = " + url + " - " + result);
 		return result;
 	}
 	

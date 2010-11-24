@@ -35,7 +35,7 @@ public class HdfsWriter extends Thread{
 	public void write() {
 		Configuration conf = new Configuration();
 		FileSystem fs = null;
-		System.out.println("path = " + path);
+		//System.out.println("path = " + path);
 		try {
 			fs = FileSystem.get(URI.create(path), conf);
 		} catch (IOException e) {
