@@ -1,4 +1,4 @@
-package proxy;
+package proxy.download;
 import java.util.Date;
 
 public class DownloadResult {

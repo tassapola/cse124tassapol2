@@ -5,6 +5,8 @@ import java.util.*;
 import javax.servlet.ServletContext;
 
 import proxy.*;
+import proxy.download.DownloadResult;
+import proxy.download.Downloader;
 import proxy.hadoop.HdfsReader;
 import proxy.hadoop.HdfsWriter;
 import util.MyUtil;
