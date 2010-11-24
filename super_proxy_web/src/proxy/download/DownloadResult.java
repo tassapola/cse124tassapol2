@@ -39,5 +39,12 @@ public class DownloadResult {
 		this.date = date;
 	}
 
+	public String toString() {
+		String r = "data.length() = " + data.length;
+		r += ",contentEncoding = " + contentEncoding;
+		r += ",contentLength = " + contentLength;
+		r += ",contentType = " + contentType;
+		return r;
+	}
 	
 }

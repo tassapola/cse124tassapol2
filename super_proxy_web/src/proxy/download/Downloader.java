@@ -56,6 +56,7 @@ public class Downloader {
 	 * @return
 	 */
 	public static DownloadResult download(String url) {
-		return SingleThreadDownloader.download(url);
+		//return SingleThreadDownloader.download(url);
+		return MultiThreadDownloaderManager.download(url);
 	}
 }
