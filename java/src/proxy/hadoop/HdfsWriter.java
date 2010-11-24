@@ -13,6 +13,12 @@ public class HdfsWriter extends Thread{
 	private String path;
 	private static final String HADOOP_PATH = "hdfs://cse124demo:9000"; 
 	
+	/**
+	 * accepts relativePath
+	 * e.g. /superproxy/dir1/file1.txt
+	 * @param data
+	 * @param relativePath
+	 */
 	public HdfsWriter(byte[] data, String relativePath) {
 		this.data = data;
 		this.path = HADOOP_PATH + relativePath;
