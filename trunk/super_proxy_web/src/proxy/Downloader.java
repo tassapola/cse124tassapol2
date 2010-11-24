@@ -70,7 +70,7 @@ public class Downloader {
 			urlConn = netUrl.openConnection();
 			in = urlConn.getInputStream();
 		} catch (IOException e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 			return null;
 		}
 		int b = 0;
@@ -79,7 +79,7 @@ public class Downloader {
 			try {
 				b = in.read();
 			} catch (IOException e) {
-				//e.printStackTrace();
+				e.printStackTrace();
 				return null;
 			}
 			if (b != -1) {
@@ -90,7 +90,7 @@ public class Downloader {
 		try {
 			in.close();
 		} catch (IOException e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 			return null;
 		}
 		result.setData(byteAW.getFinalByteArray());

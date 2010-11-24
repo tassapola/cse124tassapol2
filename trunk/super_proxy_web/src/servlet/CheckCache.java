@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.hadoop.fs.FsUrlStreamHandlerFactory;
 
 import proxy.*;
+import util.MyUtil;
 
 /**
  * Servlet implementation class CheckCache
@@ -58,12 +59,41 @@ public class CheckCache extends HttpServlet {
 			p.print("error!");
 			p.close();
 		} else {
-			ServletOutputStream o = response.getOutputStream();
 			response.setContentLength(fer.getContentLength());
 			response.setCharacterEncoding(fer.getContentEncoding());
 			response.setContentType(fer.getContentType());
-			o.write(fer.getData());
-			o.close();
+			
+			System.out.println("content type = " + fer.getContentType());
+			byte[] data = fer.getData();
+			if (fer.getContentType().equals("text/html; charset=UTF-8")) {
+				System.out.println("text/html");
+				PrintWriter p = response.getWriter();
+				for (int i=0; i < data.length; i++) {
+					p.print((char) fer.getData()[i]);
+					System.out.print((char) fer.getData()[i]);
+				}
+				System.out.println("end of printing out");
+				//o.write(fer.getData());
+				//System.out.println("=servlet=");
+				//MyUtil.print(fer.getData());
+				p.flush();
+				p.close();
+			} else {
+				
+				ServletOutputStream o = response.getOutputStream();
+				
+				
+				System.out.println("start writing out");
+				for (int i=0; i < data.length; i++) {
+					o.write(fer.getData()[i]);
+					System.out.print((char) fer.getData()[i]);
+				}
+				//o.write(fer.getData());
+				//System.out.println("=servlet=");
+				//MyUtil.print(fer.getData());
+				o.flush();
+				o.close();
+				}
 		}
 	}
 
