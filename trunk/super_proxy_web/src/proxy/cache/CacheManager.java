@@ -2,6 +2,8 @@ package proxy.cache;
 
 import java.util.*;
 
+import javax.servlet.ServletContext;
+
 import proxy.*;
 import proxy.hadoop.HdfsReader;
 import proxy.hadoop.HdfsWriter;

@@ -1,4 +1,6 @@
 package proxy;
+import javax.servlet.ServletContext;
+
 import proxy.cache.CacheManager;
 import util.MyFileWriter;
 import util.MyUtil;
@@ -13,7 +15,9 @@ public class FrontEnd {
 	}
 
 	public FrontEndResult updateCacheReturn(String url) {
+		System.out.println("starting update cache return");
 		FrontEndResult result = cacheMgr.getFrontEndResult(url);
+		System.out.println(result);
 		return result;
 	}
 	
