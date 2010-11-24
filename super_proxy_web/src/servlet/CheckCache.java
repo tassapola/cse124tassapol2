@@ -41,13 +41,13 @@ public class CheckCache extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("starting doGet");
+		//System.out.println("starting doGet");
 		ServletContext sContext = getServletContext();
-		System.out.println("sContext = " + sContext);
+		//System.out.println("sContext = " + sContext);
 		FrontEnd f = (FrontEnd) sContext.getAttribute("front_end");
-		System.out.println("f = " + f);
+		//System.out.println("f = " + f);
 		String url = (String) request.getParameter("url");
-		System.out.println("url = " + url);
+		//System.out.println("url = " + url);
 		FrontEndResult fer = null;
 		if (url != null) {
 			System.out.println("before call updatecachereturn");
