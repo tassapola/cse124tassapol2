@@ -35,6 +35,7 @@ public class MyUtil {
 		String result = null;
 		
 		if (url.startsWith("http")) {
+			//absolute link
 			String[] tokens = url.split("/");
 			result = rewriteUrlHost;
 			for (int i=0; i < tokens.length; i++) {
@@ -45,6 +46,7 @@ public class MyUtil {
 				}
 			}
 		} else {
+			//relative link
 			String[] sourceUrlTokens = sourceUrl.split("/");
 			result = "";
 			
