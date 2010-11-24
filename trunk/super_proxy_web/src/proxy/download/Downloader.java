@@ -1,4 +1,4 @@
-package proxy;
+package proxy.download;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Date;
+
 
 import util.ByteArrayWrapper;
 
@@ -70,7 +71,7 @@ public class Downloader {
 			urlConn = netUrl.openConnection();
 			in = urlConn.getInputStream();
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			return null;
 		}
 		int b = 0;
@@ -79,7 +80,7 @@ public class Downloader {
 			try {
 				b = in.read();
 			} catch (IOException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 				return null;
 			}
 			if (b != -1) {
@@ -90,7 +91,7 @@ public class Downloader {
 		try {
 			in.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			return null;
 		}
 		result.setData(byteAW.getFinalByteArray());
