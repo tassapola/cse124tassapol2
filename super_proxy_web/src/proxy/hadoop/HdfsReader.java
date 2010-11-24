@@ -5,6 +5,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URL;
+import java.net.URLStreamHandlerFactory;
+
+import javax.servlet.ServletContext;
 
 import org.apache.hadoop.conf.*;
 import org.apache.hadoop.fs.*;
@@ -26,12 +29,18 @@ public class HdfsReader{
 	 * @return null if cannot read
 	 */
 	public byte[] read() {
+		Configuration conf = new Configuration();
+		FileSystem fs = null;
+		try {
+			fs = FileSystem.get(URI.create(path), conf);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		InputStream in = null;
-		URL.setURLStreamHandlerFactory(new FsUrlStreamHandlerFactory());
 		ByteArrayWrapper bAW = new ByteArrayWrapper();
 		int b;
 		try {
-			in = new URL(path).openStream();
+			in = fs.open(new Path(path));
 			do {
 				b = in.read();
 				if (b != -1) {
@@ -42,7 +51,6 @@ public class HdfsReader{
 			e.printStackTrace();
 			return null;
 		}
-		//System.out.println("before return value of hdfs read");
 		return bAW.getFinalByteArray();
 	}
 }
