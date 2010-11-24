@@ -42,6 +42,7 @@ public class HdfsReader{
 			e.printStackTrace();
 			return null;
 		}
+		//System.out.println("before return value of hdfs read");
 		return bAW.getFinalByteArray();
 	}
 }

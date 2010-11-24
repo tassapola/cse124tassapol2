@@ -1,27 +1,27 @@
 package proxy;
+import proxy.cache.CacheManager;
 import util.MyFileWriter;
 import util.MyUtil;
 
 
 public class FrontEnd {
 
-	private String url;
-	private DownloadResult dlResult;
+	private CacheManager cacheMgr;
 	
-	public FrontEnd(String url) {
-		this.url = url;
+	public FrontEnd() {
+		cacheMgr = new CacheManager();
 	}
 
-	public void process() {
-		dlResult = Downloader.download(url);
-		byte[] newData = MyUtil.getDataAfterModifyUrl(dlResult.getData(), url);
-		dlResult.setData(newData);
-		MyUtil.print(dlResult.getData());
+	public byte[] updateCacheReturn(String url) {
+		byte[] data = cacheMgr.getData(url);
+		return data;
 	}
 	
+	/*
 	public void writeFile(String location) {
 		MyFileWriter myFileWriter = new MyFileWriter(location);
 		myFileWriter.write(dlResult.getData());
 		myFileWriter.close();
 	}
+	*/
 }

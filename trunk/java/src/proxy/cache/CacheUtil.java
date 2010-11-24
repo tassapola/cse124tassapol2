@@ -2,7 +2,6 @@ package proxy.cache;
 
 public class CacheUtil {
 
-	private static final String RELATIVE_ROOT = "/superproxy";
 	/**
 	 * url == "http://cseweb.ucsd.edu/classes/fa10/ab.html"
 	 * url == "http://cseweb.ucsd.edu/classes/fa10/"
@@ -14,8 +13,8 @@ public class CacheUtil {
 	 */
 	public static String getRelativeHadoopPath(String url) {
 		String result;
-		result = url.replaceAll("http[:][/][/]", RELATIVE_ROOT + "/");
-		result = result.replaceAll("https[:][/][/]", RELATIVE_ROOT + "/");
+		result = url.replaceAll("http[:][/][/]", UrlConstants.HADOOP_RELATIVE_ROOT + "/");
+		result = result.replaceAll("https[:][/][/]", UrlConstants.HADOOP_RELATIVE_ROOT  + "/");
 		//System.out.println(result);
 		if (result.endsWith("/")) {
 			result = result.substring(0, result.length()-1) + "_"; 

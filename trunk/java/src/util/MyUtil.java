@@ -2,6 +2,8 @@ package util;
 
 import java.io.PrintStream;
 
+import proxy.cache.UrlConstants;
+
 public class MyUtil {
 
 	public static void print(byte[] data) {
@@ -18,10 +20,8 @@ public class MyUtil {
 		ps.println();
 	}
 	
-	public final static String defaultRewriteUrlHost = "http://localhost/check_cache.jsp?url=";
-	
 	public static String rewriteUrl(String url, String sourceUrl) {
-		return rewriteUrl(url, defaultRewriteUrlHost, sourceUrl);	
+		return rewriteUrl(url, UrlConstants.DEFAULT_TARGET_WEB_HOST_REWRITE_URL, sourceUrl);	
 	}
 	
 	/**
@@ -62,7 +62,7 @@ public class MyUtil {
 	}
 	
 	public static byte[] getDataAfterModifyUrl(byte[] data, String sourceURL) {
-		return getDataAfterModifyUrl(data, defaultRewriteUrlHost, sourceURL);
+		return getDataAfterModifyUrl(data, UrlConstants.DEFAULT_TARGET_WEB_HOST_REWRITE_URL, sourceURL);
 	}
 	
 	public static byte[] getDataAfterModifyUrl(byte[] data, String rewriteUrlHost, String sourceURL) {
